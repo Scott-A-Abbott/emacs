@@ -42,8 +42,12 @@
     (load "./elpaca-autoloads")))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
+;; End of Elpaca installation snippet
 
-;; Prevent Custom from modifying this file.
-(setq custom-file (expand-file-name
-                   (format "custom-%d-%d.el" (emacs-pid) (random))
-                   temporary-file-directory))
+(elpaca elpaca-use-package
+  (elpaca-use-package-mode))
+
+(use-package literate-config
+  :ensure (:wait t :host github :repo "aaronjensen/emacs-literate-config" :protocol ssh))
+
+(literate-config-init)
